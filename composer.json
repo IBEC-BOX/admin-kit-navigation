@@ -1,12 +1,12 @@
 {
-    "name": "ryangjchandler/filament-navigation",
+    "name": "ibecsystems/admin-kit-navigation",
     "description": "Build structured navigation menus in Filament.",
     "keywords": [
         "ryangjchandler",
         "laravel",
         "filament-navigation"
     ],
-    "homepage": "https://github.com/ryangjchandler/filament-navigation",
+    "homepage": "https://github.com/IBEC-BOX/admin-kit-navigation",
     "license": "MIT",
     "authors": [
         {
