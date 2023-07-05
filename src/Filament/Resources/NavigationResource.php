@@ -107,12 +107,12 @@ class NavigationResource extends Resource
 
     public static function getLabel(): ?string
     {
-        return self::$workLabel ?? parent::getLabel();
+        return __('filament-navigation::filament-navigation.label');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return self::$workPluralLabel ?? parent::getPluralLabel();
+        return __('filament-navigation::filament-navigation.plural_label');
     }
 
     public static function table(Table $table): Table

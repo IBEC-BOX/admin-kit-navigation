@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'label' => 'Navigation',
+    'plural_label' => 'Navigations',
+
     'attributes' => [
         'external-link' => 'External link',
         'url' => 'URL',
