@@ -2,11 +2,13 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns;
 
+use AdminKit\Core\Forms\Components\TranslatableTabs;
 use Closure;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 
 use Filament\Pages\Actions\Action;
@@ -75,7 +77,7 @@ trait HandlesNavigationBuilder
         return [
             Action::make('item')
                 ->mountUsing(function (ComponentContainer $form) {
-                    if (! $this->mountedItem) {
+                    if (!$this->mountedItem) {
                         return;
                     }
 
@@ -83,9 +85,11 @@ trait HandlesNavigationBuilder
                 })
                 ->view('filament-navigation::hidden-action')
                 ->form([
-                    TextInput::make('label')
-                        ->label(__('filament-navigation::filament-navigation.items-modal.label'))
-                        ->required(),
+                    TranslatableTabs::make(fn($locale) => Tab::make($locale)->schema([
+                        TextInput::make("label.$locale")
+                            ->label(__('filament-navigation::filament-navigation.items-modal.label'))
+                            ->required($locale === app()->getLocale()),
+                    ])),
                     Select::make('type')
                         ->label(__('filament-navigation::filament-navigation.items-modal.type'))
                         ->options(function () {
@@ -94,7 +98,7 @@ trait HandlesNavigationBuilder
                             return array_combine(array_keys($types), Arr::pluck($types, 'name'));
                         })
                         ->afterStateUpdated(function ($state, Select $component): void {
-                            if (! $state) {
+                            if (!$state) {
                                 return;
                             }
 
@@ -103,7 +107,7 @@ trait HandlesNavigationBuilder
                             //       would normally let you do.
                             $component
                                 ->getContainer()
-                                ->getComponent(fn (Component $component) => $component instanceof Group)
+                                ->getComponent(fn(Component $component) => $component instanceof Group)
                                 ->getChildComponentContainer()
                                 ->fill();
                         })
@@ -126,7 +130,7 @@ trait HandlesNavigationBuilder
                     } elseif ($this->mountedChildTarget) {
                         $children = data_get($this, $this->mountedChildTarget . '.children', []);
 
-                        $children[(string) Str::uuid()] = [
+                        $children[(string)Str::uuid()] = [
                             ...$data,
                             ...['children' => []],
                         ];
@@ -135,7 +139,7 @@ trait HandlesNavigationBuilder
 
                         $this->mountedChildTarget = null;
                     } else {
-                        $this->data['items'][(string) Str::uuid()] = [
+                        $this->data['items'][(string)Str::uuid()] = [
                             ...$data,
                             ...['children' => []],
                         ];
