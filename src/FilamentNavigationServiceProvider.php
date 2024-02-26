@@ -6,10 +6,16 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
+use RyanChandler\FilamentNavigation\Providers\RouteServiceProvider;
 
 class FilamentNavigationServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function register(): void
+    {
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+    public function boot(): void
     {
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations',
