@@ -17,7 +17,7 @@ class NavigationResource extends JsonResource
         return [
             'name' => $this->name,
             'handle' => $this->handle,
-            'items' => $this->items,
+            'items' => $this->translated_items,
         ];
     }
 }

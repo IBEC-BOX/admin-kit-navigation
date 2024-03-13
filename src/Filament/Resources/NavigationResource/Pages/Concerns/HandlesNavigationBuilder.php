@@ -2,6 +2,7 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns;
 
+use Filament\Forms\Set;
 use AdminKit\Core\Forms\Components\TranslatableTabs;
 use Closure;
 use Filament\Actions\Action;
@@ -88,7 +89,20 @@ trait HandlesNavigationBuilder
                     TranslatableTabs::make(fn($locale) => Tab::make($locale)->schema([
                         TextInput::make("label.$locale")
                             ->label(__('filament-navigation::filament-navigation.items-modal.label'))
+                            ->reactive()
+                            ->debounce()
+                            ->afterStateUpdated(function (?string $state, Set $set) use ($locale) {
+                                if (! $state) {
+                                    return;
+                                }
+
+                                $set("handle.$locale", Str::slug($state));
+                            })
                             ->required($locale === app()->getLocale()),
+                        TextInput::make("handle.$locale")
+                            ->label(__('filament-navigation::filament-navigation.attributes.handle'))
+                            ->required($locale === app()->getLocale())
+                            ->unique(column: 'handle', ignoreRecord: true),
                     ])),
                     Select::make('type')
                         ->label(__('filament-navigation::filament-navigation.items-modal.type'))

@@ -17,4 +17,11 @@ class NavigationController extends Controller
 
         return NavigationResource::collection($navigations);
     }
+
+    public function show(string $handle): NavigationResource
+    {
+        $navigations = Navigation::fromHandleOrFail($handle);
+
+        return new NavigationResource($navigations);
+    }
 }
