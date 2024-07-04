@@ -1,6 +1,7 @@
 {
     "name": "ibecsystems/admin-kit-navigation",
     "description": "Navigation menus package for AdminKit",
+    "type": "admin-kit-package",
     "keywords": [
         "ryangjchandler",
         "laravel",
