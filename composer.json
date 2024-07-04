@@ -1,6 +1,6 @@
 {
     "name": "ibecsystems/admin-kit-navigation",
-    "description": "Build structured navigation menus in Filament.",
+    "description": "Navigation menus package for AdminKit",
     "keywords": [
         "ryangjchandler",
         "laravel",
