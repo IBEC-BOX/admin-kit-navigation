@@ -2,8 +2,8 @@
 
 namespace RyanChandler\FilamentNavigation\Models;
 
+use AdminKit\Core\Abstracts\Models\AbstractModel;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property \Carbon\Carbon $updated_at
  * @property Collection $translated_items
  */
-class Navigation extends Model
+class Navigation extends AbstractModel
 {
     use HasFactory;
 
